@@ -41,11 +41,13 @@ dependencies:
   get_it: ^7.7.0
   dio: ^5.4.3+1
   flutter_bloc: ^8.1.5
+  flutter_screenutil: ^5.9.0
+  meta: ^1.11.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  retrofit_generator: '>=7.0.0 <8.0.0'
+  retrofit_generator: '>=7.0.8'
   json_serializable: ^6.6.2
 
 
