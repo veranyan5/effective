@@ -4,17 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppTypography {
   static final TextStyle heading22 = TextStyle(
     fontSize: 22.sp,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600, 
   );
 
   static final TextStyle heading20 = TextStyle(
     fontSize: 20.sp,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600, 
   );
 
   static final TextStyle body16 = TextStyle(
     fontSize: 16.sp,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600, 
   );
 
   static final TextStyle body14 = TextStyle(
