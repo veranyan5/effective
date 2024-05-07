@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../../../core/app_colors.dart';
+import '../../../search/presentation/bloc/search_bloc.dart';
 import '../../../../core/typography.dart';
 import '../../../../core/widgets/text_widget.dart';
 import '../bloc/home_bloc.dart';
@@ -19,9 +21,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final HomeBloc homeBloc = HomeBloc();
+  final HomeBloc homeBloc = GetIt.I.get<HomeBloc>();
+  late final SearchBloc searchBloc;
   @override
   void initState() {
+    searchBloc = context.read<SearchBloc>();
     homeBloc.add(LoadOffersEvent());
     super.initState();
   }
@@ -31,6 +35,7 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: SizedBox.expand(
             child: Padding(
@@ -46,7 +51,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(height: 36.h),
-                  const HomePageSearchWidget(),
+                  HomePageSearchWidget(
+                    searchBloc: searchBloc,
+                  ),
                   SizedBox(height: 32.h),
                   TextWidget(
                     text: 'Музыкально отлететь',
@@ -56,13 +63,27 @@ class _HomePageState extends State<HomePage> {
                   BlocBuilder<HomeBloc, HomeState>(
                     bloc: homeBloc,
                     builder: (context, state) {
-                      return state is HomePageLoaded
-                          ? OfferListWidget(
-                              offerList: state.offers,
-                            )
-                          : const Center(
+                      switch (state) {
+                        case (HomePageLoading()):
+                          {
+                            return const Center(
                               child: CircularProgressIndicator(),
                             );
+                          }
+                        case (HomePageLoaded()):
+                          {
+                            return OfferListWidget(offerList: state.offers);
+                          }
+                        default:
+                          return const SizedBox();
+                      }
+                      // return state is HomePageLoading
+                      //     ? const Center(
+                      //         child: CircularProgressIndicator(),
+                      //       )
+                      //     : OfferListWidget(
+                      //         offerList: state.offers,
+                      //       );
                     },
                   ),
                 ],

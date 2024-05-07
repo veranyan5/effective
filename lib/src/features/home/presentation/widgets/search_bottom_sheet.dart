@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
+
+import '../../../../core/app_colors.dart';
+import '../../../search/presentation/bloc/search_bloc.dart';
+import '../bloc/home_bloc.dart';
+import 'hint_widget.dart';
+import 'popular_path_widget.dart';
+import 'search_widget_bottom_sheet.dart';
+
+class SearchBottomSheet extends StatelessWidget {
+  SearchBottomSheet({
+    super.key,
+    required this.searchBloc,
+  });
+  final HomeBloc homeBloc = GetIt.I.get<HomeBloc>();
+  final SearchBloc searchBloc;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: AppColors.basicGray2,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: SizedBox(
+            width: double.maxFinite,
+            child: Column(
+              children: [
+                SizedBox(height: 16.h),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.basicGray5,
+                  ),
+                  child: SizedBox(width: 38.w, height: 5.h),
+                ),
+                SizedBox(height: 24.h),
+                SearchWidgetBottomSheet(searchBloc: searchBloc),
+                SizedBox(height: 24.h),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    HintWidget(
+                      onTap: () {},
+                      color: AppColors.specialGreen,
+                      imagePath: 'assets/svg/path.svg',
+                      text: 'Сложный\nмаршрут',
+                    ),
+                    HintWidget(
+                      onTap: () {
+                        searchBloc.add(SetDepartureValueEvent(departureValue: 'Куда угодно'));
+                      },
+                      color: AppColors.specialBlue,
+                      imagePath: 'assets/svg/ball.svg',
+                      text: 'Куда угодно',
+                    ),
+                    HintWidget(
+                      onTap: () {},
+                      color: AppColors.specialDarkBlue,
+                      imagePath: 'assets/svg/calendar.svg',
+                      text: 'Выходные',
+                    ),
+                    HintWidget(
+                      onTap: () {},
+                      color: AppColors.specialRed,
+                      imagePath: 'assets/svg/fire.svg',
+                      text: 'Горячие\nбилеты',
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30.h),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: AppColors.basicGray3,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
+                    child: Column(
+                      children: [
+                        PopularPathWidget(
+                          imagePath: 'assets/png/istanbul.png',
+                          name: 'Стамбул',
+                          searchBloc: searchBloc,
+                        ),
+                        PopularPathWidget(
+                          imagePath: 'assets/png/sochi.jpg',
+                          name: 'Сочи',
+                          searchBloc: searchBloc,
+                        ),
+                        PopularPathWidget(
+                          imagePath: 'assets/png/phuket.png',
+                          name: 'Пхукет',
+                          searchBloc: searchBloc,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 150.h),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

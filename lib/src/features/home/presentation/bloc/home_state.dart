@@ -1,18 +1,39 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'home_bloc.dart';
 
-@immutable
-abstract class HomeState {}
+abstract class HomeState extends Equatable {}
 
-class HomeInitial extends HomeState {}
+class HomeInitialState extends HomeState {
 
-class HomePageLoading extends HomeInitial {}
 
-class HomePageLoaded extends HomeInitial {
+
+  @override
+  List<Object?> get props => [ ];
+}
+
+class HomePageLoading extends HomeState {
+  @override
+  List<Object?> get props => [];
+}
+
+class HomePageLoaded extends HomeState {
   final List<Offer> offers;
   HomePageLoaded({
     required this.offers,
   });
+  
+  @override
+  List<Object?> get props => [];
 }
 
-class HomePageError extends HomeInitial {}
+class HomePageError extends HomeState {
+  @override
+  List<Object?> get props => [];
+
+}
+
+class HomePageSearchState extends HomeState {
+  @override
+  List<Object?> get props => [];
+
+}

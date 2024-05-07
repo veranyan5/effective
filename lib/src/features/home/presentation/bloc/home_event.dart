@@ -4,3 +4,9 @@ part of 'home_bloc.dart';
 abstract class HomeEvent {}
 
 class LoadOffersEvent extends HomeEvent{}
+
+class TypeArrivalHomeEvent extends HomeEvent{
+  TypeArrivalHomeEvent({required this.text});
+
+  final String text;
+}
