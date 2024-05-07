@@ -1,7 +1,7 @@
 // ignore_for_file: directives_ordering, sort_constructors_first
 
 import '../sources/sources.dart';
-import '../../domain/repositories/repositories.dart';
+import '../../domain/repositories/api_repo.dart';
 
 class HomeRepositoryImp implements HomeRepository {
   final HomeRemoteDataSource remoteDataSource;
