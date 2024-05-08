@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_function_invocation
+
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../../../core/app_colors.dart';
 import '../../../../core/typography.dart';
@@ -16,6 +18,7 @@ import '../bloc/flight_bloc/flight_bloc.dart';
 import '../bloc/search_bloc/search_bloc.dart';
 import '../widgets/flight_widget.dart';
 import '../widgets/search_option_widget.dart';
+import 'all_tickets_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -41,7 +44,8 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 16.w),
-        child: Column(
+        child: ListView(
+          padding: EdgeInsets.only(bottom: 30.h),
           children: [
             HomePageSearchWidget(
               searchBloc: searchBloc,
@@ -121,7 +125,7 @@ class _SearchPageState extends State<SearchPage> {
                 switch (state) {
                   case (FlightLoadingState()):
                     {
-                      return const CircularProgressIndicator();
+                      return const Center(child: CircularProgressIndicator());
                     }
                   case (FlightLoadedState()):
                     {
@@ -153,13 +157,14 @@ class _SearchPageState extends State<SearchPage> {
                                             : AppColors.white
                                         : AppColors.specialRed,
                                     price: state.ticketOffers?[index].price?.value ?? 1000,
+                                    timeRange: state.ticketOffers?[index].timeRange! ?? [],
                                   ),
                                 ),
                               ),
                               SizedBox(height: 8.h),
                               GestureDetector(
                                 onTap: () {
-                                  context.push('/tickets');
+                                  pushNewScreen(context, screen: const AllTicketsPage());
                                 },
                                 child: Center(
                                   child: TextWidget(
@@ -183,7 +188,10 @@ class _SearchPageState extends State<SearchPage> {
             SizedBox(height: 24.h),
             AppButton(
               onTap: () {
-                context.push('/tickets');
+                pushNewScreen(
+                  context,
+                  screen: AllTicketsPage(),
+                );
               },
               color: AppColors.specialBlue,
               child: SizedBox(

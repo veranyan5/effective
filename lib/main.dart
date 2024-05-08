@@ -9,9 +9,11 @@ import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 import 'src/core/repositories/api_service.dart';
-import 'src/core/router.dart';
+import 'src/core/repositories/storage_service.dart';
 import 'src/core/theme.dart';
 import 'src/features/home/presentation/bloc/home_bloc.dart';
+import 'src/features/main/presentation/pages/main_page.dart';
+import 'src/features/search/presentation/bloc/all_tickets_bloc/all_tickets_bloc.dart';
 import 'src/features/search/presentation/bloc/flight_bloc/flight_bloc.dart';
 import 'src/features/search/presentation/bloc/search_bloc/search_bloc.dart';
 
@@ -24,6 +26,7 @@ void main() async {
 
   final dio = Dio();
   final talker = TalkerFlutter.init();
+  await StorageService.instance.init();
 
   dio.interceptors.add(
     TalkerDioLogger(
@@ -54,17 +57,20 @@ class MyApp extends StatelessWidget {
         BlocProvider<SearchBloc>(
           create: (context) => SearchBloc(),
         ),
-         BlocProvider<FlightBloc>(
+        BlocProvider<FlightBloc>(
           create: (context) => FlightBloc(),
+        ),
+        BlocProvider<AllTicketsBloc>(
+          create: (context) => AllTicketsBloc(),
         ),
       ],
       child: ScreenUtilInit(
-        builder: (context,_) {
-          return MaterialApp.router(
-            routerConfig: AppRouter.router,
-            
+        designSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height),
+        builder: (context, _) {
+          return MaterialApp(
             theme: AppTheme.themeData,
             debugShowCheckedModeBanner: false,
+            home: const MainPage(),
           );
         },
       ),

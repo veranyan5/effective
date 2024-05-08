@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import 'app_colors.dart';
 import 'typography.dart';
 
 class PlaceholderScreen extends StatelessWidget {
-  const PlaceholderScreen({super.key});
+  const PlaceholderScreen({super.key, this.fromNavigator = false});
+  final bool fromNavigator;
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: SizedBox(
         width: double.maxFinite,
@@ -23,13 +24,14 @@ class PlaceholderScreen extends StatelessWidget {
                 style: AppTypography.heading22.copyWith(color: AppColors.white),
               ),
               SizedBox(height: 8.h),
-              GestureDetector(
-                onTap: () => context.pop(),
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: AppColors.white,
+              if (fromNavigator)
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: AppColors.white,
+                  ),
                 ),
-              ),
             ],
           ),
         ),

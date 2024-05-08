@@ -13,10 +13,12 @@ class FlightWidget extends StatelessWidget {
     required this.name,
     required this.iconColor,
     required this.price,
+    required this.timeRange,
   });
   final String name;
   final Color iconColor;
   final int price;
+  final List<String> timeRange;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -61,10 +63,11 @@ class FlightWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                   TextWidget(
-                    text: '07:00  09:10   10:00  11:00  12:00  13:00 ',
+                    text: List<String>.from(timeRange).join('  '),
                     style: AppTypography.body14.copyWith(
                       color: AppColors.white,
                     ),
+                    maxLines: 1,
                   ),
                 ],
               ),

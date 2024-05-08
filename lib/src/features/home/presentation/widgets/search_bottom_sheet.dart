@@ -1,10 +1,15 @@
+// ignore_for_file: inference_failure_on_function_invocation
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../../../core/app_colors.dart';
+import '../../../../core/placeholder_screen.dart';
 import '../../../search/presentation/bloc/search_bloc/search_bloc.dart';
+import '../../../search/presentation/pages/search_page.dart';
 import '../../../search/presentation/widgets/popular_path_widget.dart';
 import '../bloc/home_bloc.dart';
 import 'hint_widget.dart';
@@ -24,9 +29,12 @@ class SearchBottomSheet extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: DecoratedBox(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.basicGray2,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          ),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -50,27 +58,55 @@ class SearchBottomSheet extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     HintWidget(
-                      onTap: () {},
+                      onTap: () {
+                        pushNewScreen(
+                          context,
+                          screen: const PlaceholderScreen(
+                            fromNavigator: true,
+                          ),
+                        );
+                      },
                       color: AppColors.specialGreen,
                       imagePath: 'assets/svg/path.svg',
                       text: 'Сложный\nмаршрут',
                     ),
                     HintWidget(
                       onTap: () {
-                        searchBloc.add(SetDepartureValueEvent(departureValue: 'Куда угодно'));
+                        searchBloc.add(
+                          SetDepartureValueEvent(departureValue: 'Куда угодно'),
+                        );
+                        Navigator.pop(context);
+                        pushNewScreen(
+                          context,
+                          screen: const SearchPage(),
+                        );
                       },
                       color: AppColors.specialBlue,
                       imagePath: 'assets/svg/ball.svg',
                       text: 'Куда угодно',
                     ),
                     HintWidget(
-                      onTap: () {},
+                      onTap: () {
+                        pushNewScreen(
+                          context,
+                          screen: const PlaceholderScreen(
+                            fromNavigator: true,
+                          ),
+                        );
+                      },
                       color: AppColors.specialDarkBlue,
                       imagePath: 'assets/svg/calendar.svg',
                       text: 'Выходные',
                     ),
                     HintWidget(
-                      onTap: () {},
+                      onTap: () {
+                        pushNewScreen(
+                          context,
+                          screen: const PlaceholderScreen(
+                            fromNavigator: true,
+                          ),
+                        );
+                      },
                       color: AppColors.specialRed,
                       imagePath: 'assets/svg/fire.svg',
                       text: 'Горячие\nбилеты',

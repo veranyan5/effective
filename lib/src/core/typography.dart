@@ -19,7 +19,7 @@ class AppTypography {
 
   static final TextStyle body14 = TextStyle(
     fontSize: 14.sp,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w400,
   );
 
   static final TextStyle body10 = TextStyle(

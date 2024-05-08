@@ -32,6 +32,7 @@ class InitCurrentDateTimeEvent extends SearchInitialEvent {
   @override
   List<Object?> get props => [];
 }
+
 class PickArrivalDateTimeEvent extends SearchInitialEvent {
   PickArrivalDateTimeEvent({required this.arrivalDateTime});
 
@@ -40,10 +41,24 @@ class PickArrivalDateTimeEvent extends SearchInitialEvent {
   @override
   List<Object?> get props => [arrivalDateTime];
 }
+
 class PickDepartureDateTimeEvent extends SearchInitialEvent {
   PickDepartureDateTimeEvent({required this.departureDateTime});
 
   final DateTime departureDateTime;
   @override
   List<Object?> get props => [departureDateTime];
+}
+
+class SaveValueToStorageEvent extends SearchInitialEvent {
+  SaveValueToStorageEvent({required this.value});
+
+  final String value;
+  @override
+  List<Object?> get props => [value];
+}
+
+class InitValueFromStorage extends SearchInitialEvent {
+  @override
+  List<Object?> get props => [];
 }

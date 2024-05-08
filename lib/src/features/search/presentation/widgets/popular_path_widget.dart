@@ -1,10 +1,13 @@
+// ignore_for_file: inference_failure_on_function_invocation
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../../../core/app_colors.dart';
 import '../bloc/search_bloc/search_bloc.dart';
 import '../../../../core/typography.dart';
+import '../pages/search_page.dart';
 
 class PopularPathWidget extends StatelessWidget {
   const PopularPathWidget({
@@ -21,9 +24,8 @@ class PopularPathWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         searchBloc.add(SetDepartureValueEvent(departureValue: name));
-        context
-          ..pop()
-          ..push('/search');
+        Navigator.pop(context);
+        pushNewScreen(context, screen: const SearchPage());
       },
       child: Column(
         children: [
