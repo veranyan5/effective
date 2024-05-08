@@ -53,6 +53,8 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 36.h),
                   HomePageSearchWidget(
                     searchBloc: searchBloc,
+                    iconPath: 'assets/svg/search.svg',
+                    iconColor: AppColors.basicBlack,
                   ),
                   SizedBox(height: 32.h),
                   TextWidget(
@@ -77,13 +79,6 @@ class _HomePageState extends State<HomePage> {
                         default:
                           return const SizedBox();
                       }
-                      // return state is HomePageLoading
-                      //     ? const Center(
-                      //         child: CircularProgressIndicator(),
-                      //       )
-                      //     : OfferListWidget(
-                      //         offerList: state.offers,
-                      //       );
                     },
                   ),
                 ],

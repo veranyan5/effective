@@ -18,9 +18,32 @@ class SetDepartureValueEvent extends SearchInitialEvent {
   List<Object?> get props => [departureValue];
 }
 
-class ClearDepartureValueEvent extends SearchInitialEvent{
-
+class ClearDepartureValueEvent extends SearchInitialEvent {
   @override
   List<Object?> get props => [];
+}
 
+class SwapControllersEvent extends SearchInitialEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class InitCurrentDateTimeEvent extends SearchInitialEvent {
+  @override
+  List<Object?> get props => [];
+}
+class PickArrivalDateTimeEvent extends SearchInitialEvent {
+  PickArrivalDateTimeEvent({required this.arrivalDateTime});
+
+  final DateTime arrivalDateTime;
+
+  @override
+  List<Object?> get props => [arrivalDateTime];
+}
+class PickDepartureDateTimeEvent extends SearchInitialEvent {
+  PickDepartureDateTimeEvent({required this.departureDateTime});
+
+  final DateTime departureDateTime;
+  @override
+  List<Object?> get props => [departureDateTime];
 }

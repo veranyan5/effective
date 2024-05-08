@@ -7,7 +7,7 @@ import '../../../../core/app_colors.dart';
 import '../../../search/presentation/bloc/search_bloc.dart';
 import '../bloc/home_bloc.dart';
 import 'hint_widget.dart';
-import 'popular_path_widget.dart';
+import '../../../search/presentation/widgets/popular_path_widget.dart';
 import 'search_widget_bottom_sheet.dart';
 
 class SearchBottomSheet extends StatelessWidget {

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/app_colors.dart';
-import '../../../search/presentation/bloc/search_bloc.dart';
+import '../bloc/search_bloc.dart';
 import '../../../../core/typography.dart';
 
 class PopularPathWidget extends StatelessWidget {
@@ -23,7 +23,7 @@ class PopularPathWidget extends StatelessWidget {
         searchBloc.add(SetDepartureValueEvent(departureValue: name));
         context
           ..pop()
-          ..push('/placeholder');
+          ..push('/search');
       },
       child: Column(
         children: [
