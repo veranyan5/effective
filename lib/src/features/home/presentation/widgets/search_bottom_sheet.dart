@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../core/app_colors.dart';
-import '../../../search/presentation/bloc/search_bloc.dart';
+import '../../../search/presentation/bloc/search_bloc/search_bloc.dart';
+import '../../../search/presentation/widgets/popular_path_widget.dart';
 import '../bloc/home_bloc.dart';
 import 'hint_widget.dart';
-import '../../../search/presentation/widgets/popular_path_widget.dart';
 import 'search_widget_bottom_sheet.dart';
 
 class SearchBottomSheet extends StatelessWidget {

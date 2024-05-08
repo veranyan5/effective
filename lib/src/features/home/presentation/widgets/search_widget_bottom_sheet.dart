@@ -6,8 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/app_colors.dart';
 import '../../../../core/extensions/russian_text_regexp.dart';
-import '../../../search/presentation/bloc/search_bloc.dart';
 import '../../../../core/typography.dart';
+import '../../../search/presentation/bloc/search_bloc/search_bloc.dart';
 
 class SearchWidgetBottomSheet extends StatelessWidget {
   const SearchWidgetBottomSheet({

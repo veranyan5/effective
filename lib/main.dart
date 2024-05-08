@@ -8,11 +8,12 @@ import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
 import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
+import 'src/core/repositories/api_service.dart';
 import 'src/core/router.dart';
 import 'src/core/theme.dart';
-import 'src/features/home/domain/usecases/api_service.dart';
 import 'src/features/home/presentation/bloc/home_bloc.dart';
-import 'src/features/search/presentation/bloc/search_bloc.dart';
+import 'src/features/search/presentation/bloc/flight_bloc/flight_bloc.dart';
+import 'src/features/search/presentation/bloc/search_bloc/search_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,11 +54,13 @@ class MyApp extends StatelessWidget {
         BlocProvider<SearchBloc>(
           create: (context) => SearchBloc(),
         ),
+         BlocProvider<FlightBloc>(
+          create: (context) => FlightBloc(),
+        ),
       ],
       child: ScreenUtilInit(
         builder: (context,_) {
           return MaterialApp.router(
-            locale: Locale('ru'),
             routerConfig: AppRouter.router,
             
             theme: AppTheme.themeData,

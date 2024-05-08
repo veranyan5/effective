@@ -4,12 +4,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 import '../../../../core/app_colors.dart';
 import '../../../../core/extensions/russian_text_regexp.dart';
 import '../../../../core/typography.dart';
-import '../../../search/presentation/bloc/search_bloc.dart';
+import '../../../search/presentation/bloc/search_bloc/search_bloc.dart';
 import 'search_bottom_sheet.dart';
 
 class HomePageSearchWidget extends StatelessWidget {
@@ -21,6 +22,7 @@ class HomePageSearchWidget extends StatelessWidget {
     required this.iconColor,
     this.departureReadOnly = true,
     this.openBottomSheet = true,
+    this.shouldPop = false,
   });
   final SearchBloc searchBloc;
   final String iconPath;
@@ -28,6 +30,7 @@ class HomePageSearchWidget extends StatelessWidget {
   final bool openBottomSheet;
   final bool departureReadOnly;
   final Color iconColor;
+  final bool shouldPop;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,14 +56,21 @@ class HomePageSearchWidget extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(width: 8.w),
-            SvgPicture.asset(
-              iconPath,
-              colorFilter: ColorFilter.mode(
-                iconColor,
-                BlendMode.srcIn,
+            GestureDetector(
+              onTap: () {
+                if (shouldPop) {
+                  context.pop();
+                }
+              },
+              child: SvgPicture.asset(
+                iconPath,
+                colorFilter: ColorFilter.mode(
+                  iconColor,
+                  BlendMode.srcIn,
+                ),
+                width: 24.w,
+                height: 24.w,
               ),
-              width: 24.w,
-              height: 24.w,
             ),
             SizedBox(width: 16.w),
             Expanded(
