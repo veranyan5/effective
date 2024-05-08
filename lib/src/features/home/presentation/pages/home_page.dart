@@ -1,6 +1,7 @@
 // ignore_for_file: cascade_invocations
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
@@ -26,18 +27,20 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     searchBloc = context.read<SearchBloc>();
+    searchBloc.add(InitValueFromStorage());
     homeBloc.add(LoadOffersEvent());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          child: SizedBox.expand(
+    return Scaffold(
+      // resizeToAvoidBottomInset: false,
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(top: 28.h, left: 16.w, right: 16.w),
               child: Column(
@@ -74,6 +77,7 @@ class _HomePageState extends State<HomePage> {
                           }
                         case (HomePageLoaded()):
                           {
+                            // return SizedBox();
                             return OfferListWidget(offerList: state.offers);
                           }
                         default:

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 import '../../../../core/app_colors.dart';
@@ -59,7 +57,7 @@ class HomePageSearchWidget extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 if (shouldPop) {
-                  context.pop();
+                  Navigator.pop(context);
                 }
               },
               child: SvgPicture.asset(
@@ -84,7 +82,9 @@ class HomePageSearchWidget extends StatelessWidget {
                           controller: searchBloc.arrivalTextController,
                           onChanged: (value) {
                             GetIt.I.get<Talker>().log(value);
-                            searchBloc.add(SearchEvent(searchValue: value));
+                            searchBloc
+                              ..add(SearchEvent(searchValue: value))
+                              ..add(SaveValueToStorageEvent(value: value));
                           },
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(
@@ -136,6 +136,12 @@ class HomePageSearchWidget extends StatelessWidget {
                               searchBloc.state.arrivalText.isNotEmpty
                                   ? showModalBottomSheet<Padding>(
                                       context: context,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(16),
+                                          topRight: Radius.circular(16),
+                                        ),
+                                      ),
                                       isScrollControlled: true,
                                       builder: (context) {
                                         return Padding(

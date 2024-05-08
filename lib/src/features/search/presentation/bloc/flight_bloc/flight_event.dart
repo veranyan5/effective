@@ -10,3 +10,4 @@ sealed class FlightEvent extends Equatable {
 class GetTicketOffersEvent extends FlightEvent {
   
 }
+

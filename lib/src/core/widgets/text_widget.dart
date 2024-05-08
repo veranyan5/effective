@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class TextWidget extends StatelessWidget {
-  String text;
+  final String text;
 
-  TextStyle style;
-  
-  TextAlign align;
+  final TextStyle style;
 
-  TextWidget({
+  final TextAlign align;
+  final int maxLines;
+
+  const TextWidget({
     super.key,
     required this.text,
     required this.style,
-    this.align =  TextAlign.left,
+    this.maxLines = 3,
+    this.align = TextAlign.left,
   });
 
   @override
@@ -23,7 +25,8 @@ class TextWidget extends StatelessWidget {
       text,
       style: style,
       textAlign: align,
+      maxLines: maxLines,
+      overflow: TextOverflow.ellipsis,
     );
-    
   }
 }

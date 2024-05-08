@@ -12,20 +12,27 @@ class SearchOptionWidget extends StatelessWidget {
     this.iconPath = '',
     required this.text,
     this.iconColor = AppColors.basicGray7,
+    this.color = AppColors.basicGray3,
+    this.verticalPadding = 8,
+    this.horizotalPadding = 12,
   });
   final String iconPath;
   final String text;
   final Color iconColor;
+  final Color color;
+  final int verticalPadding;
+  final int horizotalPadding;
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
-        color: AppColors.basicGray3,
+        color: color,
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
+        padding: EdgeInsets.symmetric(vertical: verticalPadding.h, horizontal: horizotalPadding.w),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             if (iconPath.isNotEmpty)
               Row(

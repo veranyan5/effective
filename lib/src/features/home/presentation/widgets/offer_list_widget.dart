@@ -26,50 +26,53 @@ class OfferListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      height: 250.h,
       child: ListView.separated(
         separatorBuilder: (context, index) => SizedBox(width: 16.w),
         scrollDirection: Axis.horizontal,
         itemCount: offerList.length,
         itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
-                  imagePath[index],
-                  height: 133.w,
+          return SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    imagePath[index],
+                    height: 133.w,
+                  ),
                 ),
-              ),
-              SizedBox(height: 8.h),
-              TextWidget(
-                text: '${offerList[index].title}',
-                style: AppTypography.body16.copyWith(color: AppColors.white),
-                align: TextAlign.center,
-              ),
-              SizedBox(height: 8.h),
-              TextWidget(
-                text: '${offerList[index].town}',
-                style: AppTypography.body14.copyWith(color: AppColors.white),
-                align: TextAlign.center,
-              ),
-              SizedBox(height: 4.h),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/svg/small_plane.svg',
-                    width: 24.w,
-                    height: 24.w,
-                  ),
-                  TextWidget(
-                    text: 'От ${offerList[index].price?.value!.formatPrice()} ₽ ',
-                    style: AppTypography.body14.copyWith(color: AppColors.white),
-                    align: TextAlign.center,
-                  ),
-                ],
-              ),
-            ],
+                SizedBox(height: 8.h),
+                TextWidget(
+                  text: '${offerList[index].title}',
+                  style: AppTypography.body16.copyWith(color: AppColors.white),
+                  align: TextAlign.center,
+                ),
+                SizedBox(height: 8.h),
+                TextWidget(
+                  text: '${offerList[index].town}',
+                  style: AppTypography.body14.copyWith(color: AppColors.white),
+                  align: TextAlign.center,
+                ),
+                SizedBox(height: 4.h),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/svg/small_plane.svg',
+                      width: 24.w,
+                      height: 24.w,
+                    ),
+                    TextWidget(
+                      text: 'От ${offerList[index].price?.value!.formatPrice()} ₽ ',
+                      style: AppTypography.body14.copyWith(color: AppColors.white),
+                      align: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           );
         },
       ),

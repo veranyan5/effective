@@ -18,3 +18,5 @@ final class FlightLoadedState extends FlightState {
 }
 
 final class FlightLoadingErrorState extends FlightState {}
+
+
