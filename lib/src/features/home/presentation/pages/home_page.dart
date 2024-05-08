@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../core/app_colors.dart';
-import '../../../search/presentation/bloc/search_bloc.dart';
 import '../../../../core/typography.dart';
 import '../../../../core/widgets/text_widget.dart';
+import '../../../search/presentation/bloc/search_bloc/search_bloc.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/home_page_search_widget.dart';
 import '../widgets/offer_list_widget.dart';
@@ -53,6 +53,8 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 36.h),
                   HomePageSearchWidget(
                     searchBloc: searchBloc,
+                    iconPath: 'assets/svg/search.svg',
+                    iconColor: AppColors.basicBlack,
                   ),
                   SizedBox(height: 32.h),
                   TextWidget(
@@ -77,13 +79,6 @@ class _HomePageState extends State<HomePage> {
                         default:
                           return const SizedBox();
                       }
-                      // return state is HomePageLoading
-                      //     ? const Center(
-                      //         child: CircularProgressIndicator(),
-                      //       )
-                      //     : OfferListWidget(
-                      //         offerList: state.offers,
-                      //       );
                     },
                   ),
                 ],

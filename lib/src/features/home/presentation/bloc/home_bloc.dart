@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../data/models/offer_model.dart';
-import '../../domain/usecases/api_service.dart';
+import '../../../../core/repositories/api_service.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
