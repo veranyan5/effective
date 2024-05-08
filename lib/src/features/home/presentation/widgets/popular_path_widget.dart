@@ -21,7 +21,9 @@ class PopularPathWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         searchBloc.add(SetDepartureValueEvent(departureValue: name));
-        context.pop();
+        context
+          ..pop()
+          ..push('/placeholder');
       },
       child: Column(
         children: [

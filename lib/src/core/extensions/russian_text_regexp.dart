@@ -1,1 +1,1 @@
-RegExp cyrillicRegExp = RegExp(r'^[а-яА-ЯёЁ]+$');
+RegExp cyrillicRegExp = RegExp(r'^[ а-яА-ЯёЁ]+$');

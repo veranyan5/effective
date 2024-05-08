@@ -19,12 +19,15 @@ class SearchBloc extends Bloc<SearchInitialEvent, SearchInitial> {
   void searchArrival(SearchEvent event, Emitter<SearchState> emit) {
     emit(SearchInitial(arrivalText: event.searchValue!));
   }
+  
 
   void setDepartureValue(SetDepartureValueEvent event, Emitter<SearchState> emit) {
     departureTextController.value = TextEditingValue(text: event.departureValue);
+    emit(state.copyWith(departureText: departureTextController.value.text));
   }
 
   void clearDepartureValue(ClearDepartureValueEvent event, Emitter<SearchState> emit) {
     departureTextController.clear();
+    emit(state.copyWith(departureText: departureTextController.value.text));
   }
 }

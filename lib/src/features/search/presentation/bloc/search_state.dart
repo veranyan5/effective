@@ -10,6 +10,16 @@ final class SearchInitial extends SearchState {
   final String arrivalText;
   final String departureText;
 
+  SearchInitial copyWith({
+    String? arrivalText,
+    String? departureText,
+  }) {
+    return SearchInitial(
+      arrivalText: arrivalText ?? this.arrivalText,
+      departureText: departureText ?? this.departureText,
+    );
+  }
+
   @override
   List<Object?> get props => [arrivalText, departureText];
 }

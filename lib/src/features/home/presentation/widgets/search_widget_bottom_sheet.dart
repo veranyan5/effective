@@ -53,7 +53,7 @@ class SearchWidgetBottomSheet extends StatelessWidget {
                           ),
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
-                          hintText: 'Куда - Турция',
+                          hintText: 'Откуда - Москва',
                           hintStyle: AppTypography.body16.copyWith(color: AppColors.basicGray6),
                         ),
                       );
@@ -76,6 +76,9 @@ class SearchWidgetBottomSheet extends StatelessWidget {
                 SizedBox(width: 8.w),
                 Expanded(
                   child: TextFormField(
+                    onChanged: (value) {
+                      searchBloc.add(SetDepartureValueEvent(departureValue: value));
+                    },
                     inputFormatters: [FilteringTextInputFormatter.allow(cyrillicRegExp)],
                     style: AppTypography.body16.copyWith(color: AppColors.white),
                     controller: searchBloc.departureTextController,
@@ -90,9 +93,22 @@ class SearchWidgetBottomSheet extends StatelessWidget {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {},
-                  child: SvgPicture.asset('assets/svg/close.svg', width: 24.w, height: 24.w),
+                BlocBuilder<SearchBloc, SearchInitial>(
+                  bloc: searchBloc,
+                  builder: (context, state) {
+                    return state.departureText.isNotEmpty
+                        ? GestureDetector(
+                            onTap: () {
+                              searchBloc.add(ClearDepartureValueEvent());
+                            },
+                            child: SvgPicture.asset(
+                              'assets/svg/close.svg',
+                              width: 24.w,
+                              height: 24.h,
+                            ),
+                          )
+                        : const SizedBox();
+                  },
                 ),
               ],
             ),
